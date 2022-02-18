@@ -16,6 +16,8 @@ class CoverageReport
       report = read_json(report_path)
       minumum_percent = data[:min]
       covered_percent = report.dig('result', 'line') || report.dig('result', 'covered_percent')
+      puts "#{covered_percent}% covered"
+      puts "#{minumum_percent}% minimum"
       { 'lines' => { 'covered_percent' => covered_percent, 'minumum_percent' => minumum_percent } }
     end
 

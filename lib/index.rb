@@ -24,6 +24,15 @@ end
 @report_path = ENV['INPUT_RESULT_PATH']
 @data = { min: ENV['INPUT_MIN_COVERAGE'] }
 
+puts ENV
+puts "==========================="
+puts "Starting Report Generation"
 @report = CoverageReport.generate(@coverage_type, @report_path, @data)
+puts "Ending Report Generation"
+puts "==========================="
 
+puts "==========================="
+puts "Starting Github Check Runner"
 GithubCheckRunService.new(@report, @github_data, ReportAdapter).run
+puts "Ending Github Check Runner"
+puts "==========================="

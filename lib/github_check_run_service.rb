@@ -6,6 +6,7 @@ class GithubCheckRunService
   def initialize(report, github_data, report_adapter)
     @report = report
     @github_data = github_data
+    puts github_data
     @report_adapter = report_adapter
     @client = GithubClient.new(@github_data[:token], user_agent: 'coverage-action')
   end
@@ -20,6 +21,10 @@ class GithubCheckRunService
     @conclusion = @report_adapter.conclusion(@report)
     @percent = @report_adapter.lines_covered_percent(@report)
 
+    puts "Update Check Payload endpoint"
+    puts "#{endpoint_url}/#{id}"
+    puts "Payload result"
+    puts update_check_payload
     @client.patch(
       "#{endpoint_url}/#{id}",
       update_check_payload
